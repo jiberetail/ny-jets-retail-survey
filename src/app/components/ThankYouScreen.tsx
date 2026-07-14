@@ -42,7 +42,7 @@ export function ThankYouScreen({ onReset }: ThankYouScreenProps) {
 
       <motion.div
         className="relative z-40 h-full flex flex-col items-center text-center"
-        style={{ padding: "0 8% 5.5rem" }}
+        style={{ padding: "0 8% 4.1rem" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -55,7 +55,7 @@ export function ThankYouScreen({ onReset }: ThankYouScreenProps) {
           className="flex justify-center"
           style={{ width: "100%" }}
         >
-          <img src={logoSrc} alt="Jets" style={{ width: "45%", objectFit: "contain" }} />
+          <img src={logoSrc} alt="Jets" style={{ width: "56%", objectFit: "contain" }} />
         </motion.div>
 
         {/* Message */}
@@ -64,28 +64,28 @@ export function ThankYouScreen({ onReset }: ThankYouScreenProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.2 }}
           className="flex flex-col items-center"
-          style={{ marginTop: "7%", gap: "1.15rem" }}
+          style={{ marginTop: "8%", gap: "1.85rem" }}
         >
           <div
             className="rounded-full flex items-center justify-center"
             style={{
-              width: "4.25rem",
-              height: "4.25rem",
+              width: "8rem",
+              height: "8rem",
               color: "#ffffff",
               background: "linear-gradient(135deg,#16a34a,#125740)",
               boxShadow: "0 8px 24px rgba(0,0,0,0.28)",
             }}
           >
-            <CheckCircle2 style={{ width: "2.6rem", height: "2.6rem" }} />
+            <CheckCircle2 style={{ width: "5.1rem", height: "5.1rem" }} />
           </div>
 
           <h1 className="font-black text-white"
-            style={{ fontSize: "3.9rem", lineHeight: 1.0, textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}>
+            style={{ fontSize: "8.1rem", lineHeight: 0.95, textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}>
             {t("thankyou.title")}
           </h1>
 
           <p className="font-bold text-white"
-            style={{ fontSize: "1.75rem", lineHeight: 1.25, maxWidth: "24rem", textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}>
+            style={{ fontSize: "3.45rem", lineHeight: 1.12, maxWidth: "44rem", textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}>
             {t("thankyou.message")}
           </p>
         </motion.div>
@@ -96,16 +96,16 @@ export function ThankYouScreen({ onReset }: ThankYouScreenProps) {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
           className="flex flex-col items-center w-full"
-          style={{ gap: "0.9rem", marginTop: "auto" }}
+          style={{ gap: "1.05rem", marginTop: "auto" }}
         >
-          <p className="text-white/75 font-semibold" style={{ fontSize: "1.2rem" }}>
+          <p className="text-white/80 font-semibold" style={{ fontSize: "1.95rem" }}>
             {t("thankyou.countdown")} <span className="text-white font-black">{countdown}</span> {t("thankyou.seconds")}
           </p>
 
           <button
             onClick={onReset}
             className="text-white font-black rounded-2xl hover:shadow-lg transition-all w-full"
-            style={{ fontSize: "1.85rem", padding: "0.85rem 0", background: "linear-gradient(135deg, #000000 0%, #125740 100%)" }}
+            style={{ fontSize: "3.05rem", padding: "1.55rem 0", background: "linear-gradient(135deg, #000000 0%, #125740 100%)", border: "2px solid rgba(255,255,255,0.4)" }}
           >
             {t("general.close")}
           </button>

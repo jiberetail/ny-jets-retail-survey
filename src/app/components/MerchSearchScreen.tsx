@@ -146,6 +146,7 @@ const ALL_ITEMS = [
 export function MerchSearchScreen({ onComplete, onHome, onBack }: MerchSearchScreenProps) {
   const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<typeof ALL_ITEMS[0] | null>(null);
 
@@ -181,7 +182,7 @@ export function MerchSearchScreen({ onComplete, onHome, onBack }: MerchSearchScr
 
       {/* Logo */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-        className="absolute left-0 right-0 z-20 flex justify-center" style={{ top: 0 }}>
+        className="absolute left-0 right-0 z-20 flex justify-center" style={{ top: 0, pointerEvents: "none" }}>
         <img src={logoSrc} alt="Jets" style={{ width: "43%", objectFit: "contain" }} />
       </motion.div>
 
@@ -195,15 +196,21 @@ export function MerchSearchScreen({ onComplete, onHome, onBack }: MerchSearchScr
         </motion.h2>
 
         {/* Search bar */}
-        <div className="relative mb-3">
-          <Search className="absolute text-gray-400" style={{ left: "0.85rem", top: "50%", transform: "translateY(-50%)", width: "1.55rem", height: "1.55rem" }} />
+        <div className="relative mb-3" onPointerDown={() => inputRef.current?.focus()} onTouchStart={() => inputRef.current?.focus()}>
+          <Search className="absolute text-gray-400" style={{ left: "0.85rem", top: "50%", transform: "translateY(-50%)", width: "1.55rem", height: "1.55rem", pointerEvents: "none" }} />
           <input
+            ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => { setQuery(e.target.value); setSelected(null); }}
             placeholder={t("search.placeholder")}
-          className="w-full rounded-xl bg-white border-2 border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-green-600 transition-all shadow-sm"
-            style={{ fontSize: "1.35rem", padding: "0.95rem 0.9rem 0.95rem 2.8rem" }}
+            className="w-full rounded-xl bg-white border-2 border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-green-600 transition-all shadow-sm"
+            style={{ fontSize: "1.35rem", padding: "0.95rem 0.9rem 0.95rem 2.8rem", position: "relative", zIndex: 2, pointerEvents: "auto" }}
+            inputMode="search"
+            enterKeyHint="search"
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck={false}
             autoFocus
           />
         </div>

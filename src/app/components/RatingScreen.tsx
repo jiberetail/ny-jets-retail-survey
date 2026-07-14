@@ -84,7 +84,7 @@ export function RatingScreen({ onComplete, onHome, onBack }: RatingScreenProps) 
         </motion.p>
 
         {/* Rating options */}
-        <div className="flex flex-col w-full" style={{ gap: "0.85rem", marginBottom: "0.85rem", minHeight: 0 }}>
+        <div className="flex flex-col w-full" style={{ gap: "1.15rem", marginBottom: "1rem", minHeight: 0 }}>
           {ratings.map((rating, index) => {
             const isSelected = selectedRating === rating.id;
             return (
@@ -94,7 +94,7 @@ export function RatingScreen({ onComplete, onHome, onBack }: RatingScreenProps) 
                 onClick={() => setSelectedRating(rating.id)}
                 whileTap={{ scale: 0.98 }}
                 className="relative overflow-hidden rounded-xl shadow-lg flex flex-row items-center"
-                style={{ height: "7.35rem", padding: "0.75rem 1.35rem", gap: "1rem", border: isSelected ? "3px solid #fff" : "2px solid rgba(255,255,255,0.8)" }}>
+                style={{ height: "11.45rem", padding: "1.2rem 1.6rem", gap: "1.35rem", border: isSelected ? "3px solid #fff" : "2px solid rgba(255,255,255,0.8)" }}>
                 <div className="absolute inset-0 transition-all duration-300" style={{
                   background: isSelected ? rating.bg : "rgba(255,255,255,0.76)",
                   backdropFilter: "blur(2px)"
@@ -102,14 +102,14 @@ export function RatingScreen({ onComplete, onHome, onBack }: RatingScreenProps) 
                 <div className="absolute left-0 top-0 bottom-0 w-2" style={{ background: isSelected ? "#fff" : "#1e40af" }} />
                 <div className="relative flex-shrink-0 rounded-full flex items-center justify-center"
                   style={{
-                    width: "58px", height: "58px",
+                    width: "88px", height: "88px",
                     backgroundColor: isSelected ? "rgba(255,255,255,0.25)" : "rgba(255,255,255,0.9)",
                     color: isSelected ? "#fff" : rating.color,
                     boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
                   }}>
                   <rating.Icon />
                 </div>
-                <span className="relative font-black" style={{ fontSize: "2rem", lineHeight: 1.1, color: isSelected ? "#fff" : "#000" }}>
+                <span className="relative font-black" style={{ fontSize: "2.72rem", lineHeight: 1.05, color: isSelected ? "#fff" : "#000" }}>
                   {t(rating.labelKey)}
                 </span>
               </motion.button>

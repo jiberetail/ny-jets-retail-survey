@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import { Home, ArrowLeft } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { SurveyNav } from "./SurveyNav";
 import logoSrc from "../../imports/new-york-jets-logo-0-1.png";
 import backgroundVideo from "../../imports/grok-video-67c07eb1-53de-4b2d-bf02-0ebcdcc7e644.mp4";
 
@@ -36,6 +36,7 @@ export function DiscountScreen({ onComplete, onHome, onBack }: DiscountScreenPro
         <source src={backgroundVideo} type="video/mp4" />
       </video>
       <div className="absolute inset-0" style={{ background: "rgba(18,87,64,0.15)" }} />
+      <SurveyNav onBack={onBack} onHome={onHome} />
 
       {/* Logo */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
@@ -84,22 +85,6 @@ export function DiscountScreen({ onComplete, onHome, onBack }: DiscountScreenPro
           {t("general.continue")}
         </button>
 
-      </div>
-
-      {/* Nav buttons */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-4">
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onBack}
-          className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <ArrowLeft className="w-7 h-7 text-black" />
-        </motion.button>
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onHome}
-          className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Home className="w-7 h-7 text-black" />
-        </motion.button>
       </div>
     </div>
   );

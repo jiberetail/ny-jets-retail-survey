@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Home, ArrowLeft, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { SurveyNav } from "./SurveyNav";
 import logoSrc from "../../imports/new-york-jets-logo-0-1.png";
 import backgroundVideo from "../../imports/grok-video-67c07eb1-53de-4b2d-bf02-0ebcdcc7e644.mp4";
 import jersey01 from "../../imports/01-jets-shop-new-york-jets-gifts-apparel-ny-jets-gear-and-merchandise-1.jpg";
@@ -176,19 +177,20 @@ export function MerchSearchScreen({ onComplete, onHome, onBack }: MerchSearchScr
         <source src={backgroundVideo} type="video/mp4" />
       </video>
       <div className="absolute inset-0" style={{ background: "rgba(18,87,64,0.15)" }} />
+      <SurveyNav onBack={onBack} onHome={onHome} />
 
       {/* Logo */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         className="absolute left-0 right-0 z-20 flex justify-center" style={{ top: 0 }}>
-        <img src={logoSrc} alt="Jets" style={{ width: "45%", objectFit: "contain" }} />
+        <img src={logoSrc} alt="Jets" style={{ width: "43%", objectFit: "contain" }} />
       </motion.div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col px-6"
-        style={{ paddingTop: "34%", paddingBottom: "5.5rem" }}>
+        style={{ paddingTop: "32%", paddingBottom: "3.1rem" }}>
 
         <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          className="font-black text-white text-center mb-3 leading-tight" style={{ fontSize: "2.35rem" }}>
+          className="font-black text-white text-center mb-3 leading-tight" style={{ fontSize: "2.55rem", textShadow: "0 4px 18px rgba(0,0,0,0.7)" }}>
           {t("search.title")}
         </motion.h2>
 
@@ -200,8 +202,8 @@ export function MerchSearchScreen({ onComplete, onHome, onBack }: MerchSearchScr
             value={query}
             onChange={(e) => { setQuery(e.target.value); setSelected(null); }}
             placeholder={t("search.placeholder")}
-            className="w-full rounded-xl bg-white border-2 border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-green-600 transition-all shadow-sm"
-            style={{ fontSize: "1.35rem", padding: "0.8rem 0.9rem 0.8rem 2.8rem" }}
+          className="w-full rounded-xl bg-white border-2 border-gray-300 text-black placeholder-gray-400 focus:outline-none focus:border-green-600 transition-all shadow-sm"
+            style={{ fontSize: "1.35rem", padding: "0.95rem 0.9rem 0.95rem 2.8rem" }}
             autoFocus
           />
         </div>
@@ -264,25 +266,12 @@ export function MerchSearchScreen({ onComplete, onHome, onBack }: MerchSearchScr
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
           className="w-full font-black text-white rounded-xl mt-4"
           style={{
-            fontSize: "1.85rem", padding: "0.85rem 0", flexShrink: 0,
+            fontSize: "1.95rem", padding: "1rem 0", flexShrink: 0,
             backgroundColor: "#125740", border: "2px solid white",
+            boxShadow: "0 5px 18px rgba(0,0,0,0.25)"
           }}
           whileTap={{ scale: 0.97 }}>
           {t("general.continue")}
-        </motion.button>
-      </div>
-
-      {/* Nav */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-4">
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onBack} className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <ArrowLeft className="w-7 h-7 text-black" />
-        </motion.button>
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onHome} className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Home className="w-7 h-7 text-black" />
         </motion.button>
       </div>
     </div>

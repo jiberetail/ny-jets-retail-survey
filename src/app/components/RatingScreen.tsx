@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
-import { Home, ArrowLeft } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { SurveyNav } from "./SurveyNav";
 import logoSrc from "../../imports/new-york-jets-logo-0-1.png";
 import backgroundVideo from "../../imports/grok-video-67c07eb1-53de-4b2d-bf02-0ebcdcc7e644.mp4";
 
@@ -61,24 +61,25 @@ export function RatingScreen({ onComplete, onHome, onBack }: RatingScreenProps) 
         <source src={backgroundVideo} type="video/mp4" />
       </video>
       <div className="absolute inset-0" style={{ background: "rgba(18,87,64,0.15)" }} />
+      <SurveyNav onBack={onBack} onHome={onHome} />
 
       {/* Logo */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         className="absolute left-0 right-0 z-20 flex justify-center" style={{ top: 0 }}>
-        <img src={logoSrc} alt="Jets" style={{ width: "45%", objectFit: "contain" }} />
+        <img src={logoSrc} alt="Jets" style={{ width: "43%", objectFit: "contain" }} />
       </motion.div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center px-6"
-        style={{ paddingTop: "34%", paddingBottom: "5.5rem" }}>
+        style={{ paddingTop: "32%", paddingBottom: "3.1rem" }}>
 
         <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          className="font-black text-white text-center mb-2 leading-tight" style={{ fontSize: "2.55rem" }}>
+          className="font-black text-white text-center mb-2 leading-tight" style={{ fontSize: "2.65rem", textShadow: "0 4px 18px rgba(0,0,0,0.7)" }}>
           {t("rating.title")}
         </motion.h2>
 
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-          className="text-center mb-4" style={{ fontSize: "1.35rem", color: "rgba(255,255,255,0.8)" }}>
+          className="text-center mb-5" style={{ fontSize: "1.35rem", color: "rgba(255,255,255,0.86)", textShadow: "0 2px 10px rgba(0,0,0,0.6)" }}>
           {t("rating.subtitle")}
         </motion.p>
 
@@ -93,9 +94,10 @@ export function RatingScreen({ onComplete, onHome, onBack }: RatingScreenProps) 
                 onClick={() => setSelectedRating(rating.id)}
                 whileTap={{ scale: 0.98 }}
                 className="relative overflow-hidden rounded-xl shadow-lg flex flex-row items-center"
-                style={{ height: "8.25rem", padding: "0.85rem 1.35rem", gap: "1rem" }}>
+                style={{ height: "7.35rem", padding: "0.75rem 1.35rem", gap: "1rem", border: isSelected ? "3px solid #fff" : "2px solid rgba(255,255,255,0.8)" }}>
                 <div className="absolute inset-0 transition-all duration-300" style={{
-                  background: isSelected ? rating.bg : "rgba(255,255,255,0.55)"
+                  background: isSelected ? rating.bg : "rgba(255,255,255,0.76)",
+                  backdropFilter: "blur(2px)"
                 }} />
                 <div className="absolute left-0 top-0 bottom-0 w-2" style={{ background: isSelected ? "#fff" : "#1e40af" }} />
                 <div className="relative flex-shrink-0 rounded-full flex items-center justify-center"
@@ -122,25 +124,13 @@ export function RatingScreen({ onComplete, onHome, onBack }: RatingScreenProps) 
           className="w-full rounded-2xl font-black text-white"
           style={{
             marginTop: "auto",
-            fontSize: "1.85rem", padding: "0.85rem 0",
+            fontSize: "1.95rem", padding: "1rem 0",
             background: selectedRating ? "linear-gradient(135deg,#000 0%,#125740 100%)" : "#ccc",
-            cursor: selectedRating ? "pointer" : "not-allowed"
+            cursor: selectedRating ? "pointer" : "not-allowed",
+            border: selectedRating ? "2px solid #fff" : "2px solid rgba(255,255,255,0.45)",
+            boxShadow: "0 5px 18px rgba(0,0,0,0.25)"
           }}>
           {t("rating.submit")}
-        </motion.button>
-      </div>
-
-      {/* Nav */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-4">
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onBack} className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <ArrowLeft className="w-7 h-7 text-black" />
-        </motion.button>
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onHome} className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Home className="w-7 h-7 text-black" />
         </motion.button>
       </div>
     </div>

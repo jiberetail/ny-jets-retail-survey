@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Home, ArrowLeft, Trash2, Pencil, Search, Tag } from "lucide-react";
+import { Trash2, Pencil, Search, Tag } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { SurveyNav } from "./SurveyNav";
 import logoSrc from "../../imports/new-york-jets-logo-0-1.png";
 import backgroundVideo from "../../imports/grok-video-67c07eb1-53de-4b2d-bf02-0ebcdcc7e644.mp4";
 
@@ -56,6 +57,15 @@ export function CartScreen({ cartItems, onRemoveFromCart, onUpdateCartItem, onCo
   const footerPadding = denseCart ? "0.38rem 0.5rem" : "0.65rem 0.75rem";
   const actionButtonPadding = denseCart ? "0.34rem" : "0.5rem";
   const actionIconSize = denseCart ? 16 : 20;
+  const qrSize = count <= 2 ? 220 : count === 3 ? 156 : 120;
+  const qrBoxPadding = count <= 2 ? "0.68rem" : "0.5rem";
+  const qrArrowSize = count <= 2 ? 44 : 32;
+  const scanMessageFontSize = count <= 2 ? "1.46rem" : count === 3 ? "1.2rem" : "1rem";
+  const checkoutButtonHeight = count <= 2 ? "8rem" : count === 3 ? "6.2rem" : "5.05rem";
+  const checkoutIconSize = count <= 2 ? 42 : 30;
+  const backButtonFontSize = count <= 2 ? "1.48rem" : "1.12rem";
+  const discountTitleFontSize = count <= 2 ? "1.76rem" : "1.34rem";
+  const discountSubtitleFontSize = count <= 2 ? "0.94rem" : "0.74rem";
 
   const handleEditConfirm = () => {
     if (editingIndex !== null && editSize) {
@@ -78,9 +88,10 @@ export function CartScreen({ cartItems, onRemoveFromCart, onUpdateCartItem, onCo
         <source src={backgroundVideo} type="video/mp4" />
       </video>
       <div className="absolute inset-0" style={{ background: "rgba(18,87,64,0.15)" }} />
+      <SurveyNav onBack={onBack} onHome={onHome} />
 
       <div className="relative z-10 h-full flex flex-col items-center"
-        style={{ padding: "2.5% 5% 5.5rem" }}>
+        style={{ padding: "2.5% 5% 2.2rem" }}>
 
         {/* Logo */}
         <motion.img src={logoSrc} alt="Jets"
@@ -95,7 +106,7 @@ export function CartScreen({ cartItems, onRemoveFromCart, onUpdateCartItem, onCo
         </p>
 
         {/* Cart item cards */}
-        <div style={{ width: "100%", flex: 1, overflowY: count > 4 ? "auto" : "hidden", display: "flex", flexDirection: "column", gap: cartGap, marginBottom: "0.7rem", minHeight: 0 }}>
+        <div style={{ width: "100%", flex: 1, overflowY: count > 4 ? "auto" : "hidden", display: "flex", flexDirection: "column", gap: cartGap, marginBottom: "0.55rem", minHeight: 0 }}>
           {cartItems.map((item, i) => (
             <motion.div key={i}
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
@@ -135,23 +146,23 @@ export function CartScreen({ cartItems, onRemoveFromCart, onUpdateCartItem, onCo
         </div>
 
         {/* QR Code — pulsing with arrows */}
-        <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "0.5rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+        <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "0.55rem", width: "100%" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: count <= 2 ? "0.75rem" : "0.6rem" }}>
             {/* Left arrows pointing right */}
             <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
               {[0, 1].map(i => (
                 <motion.div key={i}
                   animate={{ x: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 1, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#cc0000">
+                  <svg width={qrArrowSize} height={qrArrowSize} viewBox="0 0 24 24" fill="#cc0000">
                     <polygon points="5,3 19,12 5,21" />
                   </svg>
                 </motion.div>
               ))}
             </div>
 
-            <div style={{ background: "#fff", borderRadius: "10px", padding: "0.35rem", border: "2px solid #125740", boxShadow: "0 0 14px rgba(18,87,64,0.32)" }}>
-              <QRCodeSVG value="https://www.jetsshop.com/" size={92} level="H" includeMargin={true} />
+            <div style={{ background: "#fff", borderRadius: "14px", padding: qrBoxPadding, border: "3px solid #125740", boxShadow: "0 8px 24px rgba(0,0,0,0.3), 0 0 18px rgba(255,255,255,0.3)" }}>
+              <QRCodeSVG value="https://www.jetsshop.com/" size={qrSize} level="H" includeMargin={true} />
             </div>
 
             {/* Right arrows pointing left */}
@@ -160,31 +171,31 @@ export function CartScreen({ cartItems, onRemoveFromCart, onUpdateCartItem, onCo
                 <motion.div key={i}
                   animate={{ x: [0, -8, 0], opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 1, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#cc0000">
+                  <svg width={qrArrowSize} height={qrArrowSize} viewBox="0 0 24 24" fill="#cc0000">
                     <polygon points="19,3 5,12 19,21" />
                   </svg>
                 </motion.div>
               ))}
             </div>
           </div>
-          <p style={{ fontSize: "1rem", fontWeight: 900, color: "#ffffff", textAlign: "center", marginTop: "0.45rem", lineHeight: 1.18, textShadow: "-1px -1px 0 #125740, 1px -1px 0 #125740, -1px 1px 0 #125740, 1px 1px 0 #125740, 0 1px 0 #125740, 1px 0 0 #125740, 0 -1px 0 #125740, -1px 0 0 #125740" }}>
+          <p style={{ fontSize: scanMessageFontSize, fontWeight: 900, color: "#ffffff", textAlign: "center", marginTop: "0.45rem", lineHeight: 1.15, textShadow: "-1px -1px 0 #125740, 1px -1px 0 #125740, -1px 1px 0 #125740, 1px 1px 0 #125740, 0 1px 0 #125740, 1px 0 0 #125740, 0 -1px 0 #125740, -1px 0 0 #125740" }}>
             {t("cart.scanMessage")}
           </p>
         </div>
 
         {/* Divider */}
-        <div style={{ flexShrink: 0, width: "100%", height: "1px", background: "rgba(255,255,255,0.3)", margin: "0.25rem 0 0.55rem" }} />
+        <div style={{ flexShrink: 0, width: "100%", height: "1px", background: "rgba(255,255,255,0.3)", margin: "0.2rem 0 0.55rem" }} />
 
         {/* Buttons */}
-        <div style={{ flexShrink: 0, width: "100%", display: "flex", flexDirection: "row", gap: "0.65rem", alignSelf: "center" }}>
+        <div style={{ flexShrink: 0, width: "100%", display: "flex", flexDirection: "row", gap: "0.8rem", alignSelf: "center" }}>
           <button onClick={onContinueShopping}
-            style={{ flex: 1, minHeight: "4.25rem", padding: "0.45rem 0.5rem", borderRadius: "10px", border: "2px solid #bbb", backgroundColor: "#fff", color: "#111", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.2rem" }}>
-            <Search size={20} color="#111" />
-            <span style={{ fontSize: "0.92rem", fontWeight: 900, lineHeight: 1.03 }}>{t("cart.backToItem")}</span>
-            <span style={{ fontSize: "0.92rem", fontWeight: 900, lineHeight: 1.03 }}>{t("cart.selection")}</span>
+            style={{ flex: 1, minHeight: checkoutButtonHeight, padding: "0.6rem 0.75rem", borderRadius: "12px", border: "3px solid #d5d5d5", backgroundColor: "#fff", color: "#111", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.26rem", boxShadow: "0 4px 12px rgba(0,0,0,0.18)" }}>
+            <Search size={checkoutIconSize} color="#111" />
+            <span style={{ fontSize: backButtonFontSize, fontWeight: 900, lineHeight: 1.02 }}>{t("cart.backToItem")}</span>
+            <span style={{ fontSize: backButtonFontSize, fontWeight: 900, lineHeight: 1.02 }}>{t("cart.selection")}</span>
           </button>
           <motion.button onClick={onDiscount}
-            style={{ flex: 1, minHeight: "4.25rem", padding: "0.45rem 0.5rem", borderRadius: "10px", border: "2px solid #bbb", backgroundColor: "#fff", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.2rem", overflow: "hidden", position: "relative" }}
+            style={{ flex: 1, minHeight: checkoutButtonHeight, padding: "0.6rem 0.75rem", borderRadius: "12px", border: "3px solid #d5d5d5", backgroundColor: "#fff", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.24rem", overflow: "hidden", position: "relative", boxShadow: "0 4px 12px rgba(0,0,0,0.18)" }}
             whileTap={{ scale: 0.97 }}>
             {/* Shimmer overlay */}
             <motion.div
@@ -192,9 +203,9 @@ export function CartScreen({ cartItems, onRemoveFromCart, onUpdateCartItem, onCo
               transition={{ duration: 2, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
               style={{ position: "absolute", top: 0, bottom: 0, width: "40%", background: "linear-gradient(90deg, transparent, rgba(204,0,0,0.15), transparent)", pointerEvents: "none" }}
             />
-            <Tag size={20} color="#cc0000" />
-            <span style={{ fontSize: "1.08rem", fontWeight: 900, color: "#cc0000", lineHeight: 1, whiteSpace: "nowrap" }}>{t("cart.discountTitle")}</span>
-            <span style={{ fontSize: "0.66rem", fontWeight: 700, color: "#111", lineHeight: 1.08, textAlign: "center" }}>{t("cart.discountSubtitle")}</span>
+            <Tag size={checkoutIconSize} color="#cc0000" />
+            <span style={{ fontSize: discountTitleFontSize, fontWeight: 900, color: "#cc0000", lineHeight: 1, whiteSpace: "nowrap" }}>{t("cart.discountTitle")}</span>
+            <span style={{ fontSize: discountSubtitleFontSize, fontWeight: 800, color: "#111", lineHeight: 1.06, textAlign: "center" }}>{t("cart.discountSubtitle")}</span>
           </motion.button>
         </div>
       </div>
@@ -261,19 +272,6 @@ export function CartScreen({ cartItems, onRemoveFromCart, onUpdateCartItem, onCo
         )}
       </AnimatePresence>
 
-      {/* Nav buttons */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-4">
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onBack} className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <ArrowLeft className="w-7 h-7 text-black" />
-        </motion.button>
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onHome} className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Home className="w-7 h-7 text-black" />
-        </motion.button>
-      </div>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Home, ArrowLeft, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { SurveyNav } from "./SurveyNav";
 import logoSrc from "../../imports/new-york-jets-logo-0-1.png";
 import backgroundVideo from "../../imports/grok-video-67c07eb1-53de-4b2d-bf02-0ebcdcc7e644.mp4";
 
@@ -87,31 +88,32 @@ export function FeedbackScreen({ onComplete, onHome, onBack }: FeedbackScreenPro
         <source src={backgroundVideo} type="video/mp4" />
       </video>
       <div className="absolute inset-0" style={{ background: "rgba(18,87,64,0.15)" }} />
+      <SurveyNav onBack={onBack} onHome={onHome} />
 
       {/* Logo */}
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         className="absolute left-0 right-0 z-20 flex justify-center" style={{ top: 0 }}>
-        <img src={logoSrc} alt="Jets" style={{ width: "45%", objectFit: "contain" }} />
+        <img src={logoSrc} alt="Jets" style={{ width: "43%", objectFit: "contain" }} />
       </motion.div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center px-6"
-        style={{ paddingTop: "34%", paddingBottom: "5.5rem" }}>
+        style={{ paddingTop: "32%", paddingBottom: "3.1rem" }}>
 
         <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          className="font-black text-white text-center mb-2 leading-tight" style={{ fontSize: "2.55rem" }}>
+          className="font-black text-white text-center mb-2 leading-tight" style={{ fontSize: "2.65rem", textShadow: "0 4px 18px rgba(0,0,0,0.7)" }}>
           {t("feedback.title")}
         </motion.h2>
 
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-          className="text-center mb-4" style={{ fontSize: "1.35rem", color: "rgba(255,255,255,0.8)" }}>
+          className="text-center mb-5" style={{ fontSize: "1.35rem", color: "rgba(255,255,255,0.86)", textShadow: "0 2px 10px rgba(0,0,0,0.6)" }}>
           {t("feedback.subtitle")}
         </motion.p>
 
         {/* Grid */}
         <div
-          className="grid grid-cols-2 w-full flex-1"
-          style={{ gap: "0.7rem", marginBottom: "0.85rem", minHeight: 0, gridTemplateRows: "repeat(3, minmax(0, 1fr))" }}
+          className="grid grid-cols-2 w-full"
+          style={{ gap: "0.85rem", marginBottom: "1rem", height: "43rem", flexShrink: 0, gridTemplateRows: "repeat(3, minmax(0, 1fr))" }}
         >
           {feedbackOptions.map((option, index) => {
             const isSelected = selectedFeedback.includes(option.key);
@@ -122,23 +124,23 @@ export function FeedbackScreen({ onComplete, onHome, onBack }: FeedbackScreenPro
                 onClick={() => handleFeedbackToggle(option.key)}
                 whileTap={{ scale: 0.95 }}
                 className="relative overflow-hidden rounded-xl shadow-lg flex flex-col items-center justify-center"
-                style={{ padding: "0.65rem 0.5rem", minHeight: 0 }}>
+                style={{ padding: "0.7rem 0.7rem", minHeight: 0, border: isSelected ? "3px solid #fff" : "2px solid rgba(255,255,255,0.9)" }}>
                 <div className="absolute inset-0 transition-all duration-300" style={{
-                  background: isSelected ? "linear-gradient(135deg,#000 0%,#125740 100%)" : "#ffffff"
+                  background: isSelected ? "linear-gradient(135deg,#000 0%,#125740 100%)" : "rgba(255,255,255,0.92)"
                 }} />
                 <div className="absolute left-0 top-0 bottom-0 w-2" style={{ background: isSelected ? "#fff" : "#1e40af" }} />
-                <div className="relative flex flex-col items-center gap-3">
+                <div className="relative flex flex-col items-center justify-center gap-3">
                   <div style={{
                     color: isSelected ? "#fff" : option.color,
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    width: "48px", height: "48px",
+                    width: "64px", height: "64px",
                     borderRadius: "50%",
                     backgroundColor: isSelected ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.9)",
                     boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
                   }}>
                     <option.Icon />
                   </div>
-                  <span className="font-black text-center" style={{ fontSize: "1.12rem", lineHeight: 1.18, color: isSelected ? "#fff" : "#000" }}>
+                  <span className="font-black text-center" style={{ fontSize: "1.34rem", lineHeight: 1.14, color: isSelected ? "#fff" : "#000" }}>
                     {t(option.key)}
                   </span>
                 </div>
@@ -153,25 +155,14 @@ export function FeedbackScreen({ onComplete, onHome, onBack }: FeedbackScreenPro
           disabled={selectedFeedback.length === 0}
           className="w-full rounded-2xl font-black text-white"
           style={{
-            fontSize: "1.85rem", padding: "0.85rem 0",
+            marginTop: "auto",
+            fontSize: "1.95rem", padding: "1rem 0",
             background: selectedFeedback.length > 0 ? "linear-gradient(135deg,#000 0%,#125740 100%)" : "#ccc",
-            cursor: selectedFeedback.length > 0 ? "pointer" : "not-allowed"
+            cursor: selectedFeedback.length > 0 ? "pointer" : "not-allowed",
+            border: selectedFeedback.length > 0 ? "2px solid #fff" : "2px solid rgba(255,255,255,0.45)",
+            boxShadow: "0 5px 18px rgba(0,0,0,0.25)"
           }}>
           {t("general.continue")}
-        </motion.button>
-      </div>
-
-      {/* Nav */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-4">
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onBack} className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <ArrowLeft className="w-7 h-7 text-black" />
-        </motion.button>
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-          onClick={onHome} className="p-5 bg-white border-2 rounded-full shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Home className="w-7 h-7 text-black" />
         </motion.button>
       </div>
 

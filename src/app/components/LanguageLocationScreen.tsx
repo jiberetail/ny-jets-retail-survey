@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import { Home, ArrowLeft } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { SurveyNav } from "./SurveyNav";
 import logoSrc from "../../imports/new-york-jets-logo-0-1.png";
 import backgroundVideo from "../../imports/grok-video-67c07eb1-53de-4b2d-bf02-0ebcdcc7e644.mp4";
 
@@ -122,6 +122,7 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
 
       {/* Light overlay for better contrast */}
       <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(18,87,64,0.16) 42%, rgba(0,0,0,0.28))" }} />
+      <SurveyNav onBack={handleBackButton} onHome={onHome} />
 
       {/* Jets Logo */}
       <motion.div
@@ -294,33 +295,6 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
             </div>
           </motion.div>
         )}
-      </div>
-
-      {/* Navigation buttons */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-4">
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          onClick={handleBackButton}
-          className="p-5 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <ArrowLeft className="w-7 h-7 text-black" />
-        </motion.button>
-
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          onClick={onHome}
-          className="p-5 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <Home className="w-7 h-7 text-black" />
-        </motion.button>
       </div>
     </div>
   );

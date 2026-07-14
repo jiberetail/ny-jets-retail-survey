@@ -1,11 +1,19 @@
+# NY Jets Retail Survey
 
-  # NY Jets Retail Survey
+Interactive 9:16 kiosk survey for the New York Jets retail demo.
 
-  This is a code bundle for NY Jets Retail Survey. The original project is available at https://www.figma.com/design/TsY81tKC13ziJ0RKwNruPk/NY-Jets-Retail-Survey.
+## Public Demo
 
-  ## Running the code
+[Open the NY Jets Retail Survey](https://jiberetail.github.io/ny-jets-retail-survey/)
 
-  Run `npm i` to install the dependencies.
+The public demo is deployed from the `jiberetail` GitHub organization. Public
+project URLs must use an organization-owned `jiberetail.github.io` address and
+must never use a personal account name.
 
-  Run `npm run dev` to start the development server.
-  
+## Development
+
+```bash
+pnpm install
+pnpm run dev
+pnpm run build
+```

@@ -185,11 +185,11 @@ export function SurveyQuestionsScreen({ onComplete, onHome, onBack, startQuestio
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
           onClick={handleBack}
-          className="p-3 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
+          className="p-5 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <ArrowLeft className="w-5 h-5 text-black" />
+          <ArrowLeft className="w-7 h-7 text-black" />
         </motion.button>
 
         <motion.button
@@ -197,11 +197,11 @@ export function SurveyQuestionsScreen({ onComplete, onHome, onBack, startQuestio
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
           onClick={onHome}
-          className="p-3 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
+          className="p-5 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Home className="w-5 h-5 text-black" />
+          <Home className="w-7 h-7 text-black" />
         </motion.button>
       </div>
     </div>

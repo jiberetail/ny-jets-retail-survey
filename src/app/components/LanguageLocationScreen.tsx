@@ -121,7 +121,7 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
       </video>
 
       {/* Light overlay for better contrast */}
-      <div className="absolute inset-0" style={{ background: "rgba(18,87,64,0.15)" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(18,87,64,0.16) 42%, rgba(0,0,0,0.28))" }} />
 
       {/* Jets Logo */}
       <motion.div
@@ -131,11 +131,11 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
         className="absolute left-0 right-0 z-20 flex justify-center"
         style={{ top: "0px" }}
       >
-        <img src={logoSrc} alt="Jets" style={{ width: "48%", objectFit: "contain" }} />
+        <img src={logoSrc} alt="Jets" style={{ width: "46%", objectFit: "contain" }} />
       </motion.div>
 
       {/* Main content */}
-      <div className="relative z-10 h-full flex flex-col items-center px-8" style={{ paddingTop: "39%" }}>
+      <div className="relative z-10 h-full flex flex-col items-center px-8" style={{ paddingTop: "36%" }}>
         {step === "language" ? (
           <motion.div
             key="language"
@@ -150,7 +150,7 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               className="font-black text-white text-center mb-3"
-              style={{ fontSize: "3.8rem" }}
+              style={{ fontSize: "4.25rem", textShadow: "0 4px 18px rgba(0,0,0,0.65)" }}
             >
               {t("lang.selectLanguage")}
             </motion.h2>
@@ -159,8 +159,8 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-center text-white/80 mb-6"
-              style={{ fontSize: "1.7rem" }}
+              className="text-center text-white mb-6 font-semibold"
+              style={{ fontSize: "2.15rem", textShadow: "0 3px 12px rgba(0,0,0,0.7)" }}
             >
               {t("lang.chooseLanguage")}
             </motion.p>
@@ -174,13 +174,15 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
                   transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
                   onClick={() => handleLanguageSelect(lang.code)}
                   className="relative overflow-hidden rounded-xl"
-                  style={{ height: "8.4rem" }}
+                  style={{ height: "9rem" }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <div className="absolute inset-0 transition-all duration-300 shadow-lg" style={{
                     background: selectedLanguage === lang.code
                       ? "linear-gradient(135deg, #000000 0%, #125740 100%)"
-                      : "rgba(255,255,255,0.55)",
+                      : "rgba(255,255,255,0.93)",
+                    border: selectedLanguage === lang.code ? "3px solid #fff" : "3px solid rgba(255,255,255,0.9)",
+                    boxShadow: "0 8px 24px rgba(0,0,0,0.22)",
                   }} />
                   <div className="absolute left-0 top-0 bottom-0 w-3 transition-all duration-300" style={{
                     background: selectedLanguage === lang.code ? "#fff" : "#1e40af",
@@ -188,7 +190,7 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
                   <div className="relative h-full flex items-center justify-center gap-5">
                     <img src={`https://flagcdn.com/w80/${lang.flagImg}.png`} alt={lang.name} style={{ width: "3rem", height: "2.1rem", objectFit: "cover", borderRadius: "4px" }} />
                     <span className="font-black tracking-tight transition-all duration-300" style={{
-                      fontSize: "2.5rem",
+                      fontSize: "2.8rem",
                       color: selectedLanguage === lang.code ? "#fff" : "#000",
                     }}>
                       {lang.name}
@@ -212,7 +214,7 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               className="font-black text-white text-center mb-3"
-              style={{ fontSize: "3.8rem" }}
+              style={{ fontSize: "4.25rem", textShadow: "0 4px 18px rgba(0,0,0,0.65)" }}
             >
               {t("lang.selectLocation")}
             </motion.h2>
@@ -221,8 +223,8 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-center text-white/80 mb-6"
-              style={{ fontSize: "1.7rem" }}
+              className="text-center text-white mb-6 font-semibold"
+              style={{ fontSize: "2.15rem", textShadow: "0 3px 12px rgba(0,0,0,0.7)" }}
             >
               {t("lang.chooseCountry")}
             </motion.p>
@@ -236,13 +238,15 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
                     transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
                     onClick={() => handleLocationSelect(location.id)}
                     className="relative overflow-hidden rounded-xl w-full"
-                    style={{ height: "7.4rem" }}
+                    style={{ height: "8.5rem" }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="absolute inset-0 transition-all duration-300 shadow-lg" style={{
                       background: selectedLocation === location.id
                         ? "linear-gradient(135deg, #000000 0%, #125740 100%)"
-                        : "rgba(255,255,255,0.55)",
+                        : "rgba(255,255,255,0.94)",
+                      border: selectedLocation === location.id ? "3px solid #fff" : "3px solid rgba(255,255,255,0.9)",
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.22)",
                     }} />
                     <div className="absolute left-0 top-0 bottom-0 w-3 transition-all duration-300" style={{
                       background: selectedLocation === location.id ? "#fff" : "#1e40af",
@@ -250,7 +254,7 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
                     <div className="relative h-full flex items-center justify-center gap-5">
                       <img src={`https://flagcdn.com/w80/${location.flag}.png`} alt={t(location.labelKey)} style={{ width: "3rem", height: "2.1rem", objectFit: "cover", borderRadius: "4px" }} />
                       <span className="font-black tracking-tight transition-all duration-300" style={{
-                        fontSize: "2.45rem",
+                        fontSize: "2.75rem",
                         color: selectedLocation === location.id ? "#fff" : "#000",
                       }}>
                         {t(location.labelKey)}
@@ -270,8 +274,8 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
                         onChange={(e) => handleStateSelect(e.target.value)}
                         className="w-full px-6 bg-white border-2 border-gray-300 rounded-xl text-black appearance-none cursor-pointer focus:outline-none shadow-lg"
                         style={{
-                          height: "5.8rem",
-                          fontSize: "2rem",
+                          height: "6.2rem",
+                          fontSize: "2.2rem",
                           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
                           backgroundRepeat: "no-repeat",
                           backgroundPosition: "right 1.5rem center",
@@ -299,11 +303,11 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
           onClick={handleBackButton}
-          className="p-3 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
+          className="p-5 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <ArrowLeft className="w-5 h-5 text-black" />
+          <ArrowLeft className="w-7 h-7 text-black" />
         </motion.button>
 
         <motion.button
@@ -311,11 +315,11 @@ export function LanguageLocationScreen({ onContinue, onHome, onBack }: LanguageL
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
           onClick={onHome}
-          className="p-3 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
+          className="p-5 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Home className="w-5 h-5 text-black" />
+          <Home className="w-7 h-7 text-black" />
         </motion.button>
       </div>
     </div>

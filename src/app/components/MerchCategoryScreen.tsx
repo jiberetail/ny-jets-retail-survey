@@ -63,7 +63,7 @@ export function MerchCategoryScreen({ sport, teamName, teamLogo, cartCount, onCo
       </video>
 
       {/* Light overlay for better contrast */}
-      <div className="absolute inset-0" style={{ background: "rgba(18,87,64,0.15)" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.28), rgba(18,87,64,0.12) 45%, rgba(0,0,0,0.34))" }} />
 
       {/* Jets Logo */}
       <motion.div
@@ -77,7 +77,7 @@ export function MerchCategoryScreen({ sport, teamName, teamLogo, cartCount, onCo
       </motion.div>
 
       {/* Main content */}
-      <div className="relative z-10 h-full flex flex-col items-center px-6" style={{ paddingTop: "38%", paddingBottom: "10%" }}>
+      <div className="relative z-10 h-full flex flex-col items-center px-6" style={{ paddingTop: "36%", paddingBottom: "11%" }}>
 
         {/* Title */}
         <motion.h2
@@ -85,13 +85,13 @@ export function MerchCategoryScreen({ sport, teamName, teamLogo, cartCount, onCo
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           className="font-black text-white text-center leading-tight w-full"
-          style={{ fontSize: "2.85rem", marginBottom: "4%" }}
+          style={{ fontSize: "3.2rem", marginBottom: "4%", textShadow: "0 4px 18px rgba(0,0,0,0.7)" }}
         >
           {t("merch.categoryTitle")}
         </motion.h2>
 
         {/* Categories Grid - 2x2, fills remaining space */}
-        <div className="grid grid-cols-2 w-full" style={{ gap: "3.2%", flex: 1 }}>
+        <div className="grid grid-cols-2 w-full" style={{ gap: "3%", flex: 1 }}>
           {categories.map((category, index) => (
             <motion.button
               key={category.id}
@@ -103,14 +103,14 @@ export function MerchCategoryScreen({ sport, teamName, teamLogo, cartCount, onCo
               whileTap={{ scale: 0.95 }}
             >
               {/* Card */}
-              <div className="relative rounded-2xl overflow-hidden shadow-lg" style={{ backgroundColor: "#ffffff", flex: 1, width: "100%" }}>
-                <div className="absolute inset-0 p-4 flex items-center justify-center">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg" style={{ backgroundColor: "#ffffff", border: "3px solid rgba(255,255,255,0.95)", flex: 1, width: "100%" }}>
+                <div className="absolute inset-0 p-3 flex items-center justify-center">
                   <img src={category.image} alt={t(category.labelKey)} className="w-full h-full object-contain" />
                 </div>
               </div>
 
               {/* Label */}
-              <div className="text-center font-black text-white tracking-tight" style={{ fontSize: "2.1rem", marginTop: "3%" }}>
+              <div className="text-center font-black text-white tracking-tight" style={{ fontSize: "2.45rem", marginTop: "3%", textShadow: "0 3px 12px rgba(0,0,0,0.85)" }}>
                 {t(category.labelKey)}
               </div>
             </motion.button>
@@ -123,10 +123,10 @@ export function MerchCategoryScreen({ sport, teamName, teamLogo, cartCount, onCo
         <motion.button
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
           onClick={onBack}
-          className="p-3 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
+          className="p-5 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
           whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
         >
-          <ArrowLeft className="w-5 h-5 text-black" />
+          <ArrowLeft className="w-7 h-7 text-black" />
         </motion.button>
 
         {cartCount > 0 && (
@@ -143,10 +143,10 @@ export function MerchCategoryScreen({ sport, teamName, teamLogo, cartCount, onCo
         <motion.button
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
           onClick={onHome}
-          className="p-3 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
+          className="p-5 bg-white border-2 rounded-full transition-all shadow-lg" style={{ borderColor: "#125740" }}
           whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
         >
-          <Home className="w-5 h-5 text-black" />
+          <Home className="w-7 h-7 text-black" />
         </motion.button>
       </div>
     </div>
